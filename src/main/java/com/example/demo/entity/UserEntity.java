@@ -12,6 +12,9 @@ import javax.persistence.Id;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+
     private long id;
     private String username;
     private String password;

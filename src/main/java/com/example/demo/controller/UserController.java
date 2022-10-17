@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.UserEntity;
 import com.example.demo.exception.UserAlreadyExistException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.repository.UserRepo;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,12 @@ public class UserController {
         }
     }
     @GetMapping("/")
-    public ResponseEntity getUsers() {
+    public ResponseEntity getOneUser(@RequestParam Long id) {
         try {
-            return ResponseEntity.ok("Сервер работает");
-        } catch (Exception e) {
+            return ResponseEntity.ok(userService.getUser(id));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }

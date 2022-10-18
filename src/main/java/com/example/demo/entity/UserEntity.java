@@ -2,11 +2,9 @@ package com.example.demo.entity;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class UserEntity {
@@ -18,6 +16,9 @@ public class UserEntity {
     private long id;
     private String username;
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<TodoEntity> todos;
 
     public UserEntity() {
     }
